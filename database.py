@@ -23,7 +23,7 @@ class Database:
         except sqlite3.Error as e:
             print(e)
 
-    def _germany_data(self): 
+    def _country_data(self, _country): 
         
         sql_query = """
                 SELECT 
@@ -31,8 +31,14 @@ class Database:
                 FROM
                 global_power_plant_database
                 WHERE
-                country like "DEU"
+                country_long like ?
+                ORDER BY
+                capacity_mw DESC
                      """
-        _df = pd.read_sql(sql_query, self.db)
+        parameters = (_country, )
+        
+        _df = pd.read_sql(sql_query, self.db, params=parameters)
 
-        return _df.head(200) # returns a df
+        print(f"\n df shape = {_df.shape}")
+
+        return _df # returns a df
