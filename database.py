@@ -25,6 +25,7 @@ class Database:
 
     def _country_data(self, _country): 
         
+        #TODO: Creating a flexible sql string to incorporate all conditions
         sql_query = """
                 SELECT 
                 name, capacity_mw, primary_fuel, owner, source, latitude, longitude
@@ -41,4 +42,26 @@ class Database:
 
         print(f"\n df shape = {_df.shape}")
 
-        return _df # returns a df
+        return _df
+    
+    def _country_list(self): 
+        
+        sql_query = """
+                SELECT DISTINCT(country_long) AS country_list 
+                FROM global_power_plant_database
+                     """
+        
+        _df = pd.read_sql(sql_query, self.db)
+
+        return _df
+    
+    def _primary_fuel_list(self): 
+        
+        sql_query = """
+                SELECT DISTINCT(primary_fuel) AS primary_fuel_list 
+                FROM global_power_plant_database
+                     """
+        
+        _df = pd.read_sql(sql_query, self.db)
+
+        return _df

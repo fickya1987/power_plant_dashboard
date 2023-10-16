@@ -1,3 +1,4 @@
+from turtle import width
 import folium
 import streamlit as st
 from streamlit_folium import st_folium
@@ -43,18 +44,31 @@ class App:
 
     def __init__(self) -> None:    
         
+        # instantiating database object
+        DB = Database()
+
         # SIDE BAR
-        "Imput Stock Symbol"
-        self.country = st.sidebar.text_input('Enter country', value="Germany")
+        # List of countries
+        self.country = st.sidebar.selectbox(
+                            'Select Country',
+                            DB._country_list(),# quering country list
+                            index = 0
+                            )
+        
+        self.primary_fuel = st.sidebar.selectbox(
+                            'Select Primary Fuel',
+                            DB._primary_fuel_list(),# quering country list
+                            index = 0
+                            )
+        
+        # Top number of Plants to Display
         num_of_plants = st.sidebar.selectbox(
                             'Show how many power plants?',
                             (10,100,"all"),
                             index = 0
                             )
         
-        # data
-        # instantiating database object
-        DB = Database()
+        
         
         # extracting info
         df = DB._country_data(self.country)
@@ -65,7 +79,6 @@ class App:
             df = df.head(num_of_plants)
 
         # MAP
-        "map"
         self.map = folium.Map(
                         [df.loc[0, "latitude"], df.loc[0, "longitude"]], # zooming into the country
                         zoom_start=3,
@@ -77,7 +90,8 @@ class App:
 
 
         # call to render Folium map in Streamlit
-        st_data = st_folium(self.map)
+        st_data = st_folium(self.map, 
+                            width = 2000)
 
         # TABLES
         # top ten
