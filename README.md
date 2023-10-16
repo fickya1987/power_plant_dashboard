@@ -6,3 +6,6 @@ Global Power Plants - Streamlit Dashboard
 TODO:
 - Making a flexible sql to filter by country & fuel
 - change the colour of the bar graphs
+
+Docs:
+[Streamlit-Folium](https://folium.streamlit.app/)
