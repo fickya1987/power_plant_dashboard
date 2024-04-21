@@ -128,7 +128,7 @@ sniffio
 soupsieve
 stack-data
 streamlit
-streamlit-folium=
+streamlit-folium
 sympy
 tenacity
 terminado
