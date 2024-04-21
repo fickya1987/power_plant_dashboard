@@ -1,0 +1,14 @@
+/* Increase the font size for all text within the Streamlit app */
+body {
+    font-size: 18px;
+}
+
+/* Increase the font size for a specific Streamlit component, e.g., a header */
+h1 {
+    font-size: 24px;
+}
+
+/* Increase the font size for a specific Streamlit component, e.g., a paragraph */
+p {
+    font-size: 16px;
+}
